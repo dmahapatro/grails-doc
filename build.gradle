@@ -17,12 +17,41 @@ configurations {
 buildscript {
     repositories {
         maven { url = "http://repo.grails.org/grails/core" }
+        jcenter()
+        maven {
+            name 'Bintray Asciidoctor repo'
+            url 'http://dl.bintray.com/content/aalmiray/asciidoctor'
+        }
     }
 
     dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:0.5.0'
         classpath "org.grails:grails-docs:2.0.1"
     }
 }
+
+apply plugin: 'asciidoctor'
+
+asciidoctor {
+    logDocuments = true
+    outputDir = new File("$buildDir/docs/asciidoc")
+    options = [
+            ':safe': 0,
+            attributes: [
+                    'source-highlighter': 'prettify',
+                    doctype: 'book',
+                    icons : 'font',
+                    toc2: '',
+                    'linkcss!': '',
+                    experimental: true,
+                    copycss: true,
+                    encoding: 'utf-8'
+            ]
+    ]
+}
+
+// skip the asciidoctor task if there's no directory with asciidoc files
+asciidoctor.onlyIf { project.file('src/asciidoc').exists() }
 
 task fetchGrailsSource << {
     ant.mkdir dir: checkOutDir
@@ -96,7 +125,7 @@ tasks.addRule("Pattern: publishPdf_<lang>") { String taskName ->
     }
 }
 
-task docs(dependsOn: ['publishPdf'])
+task docs(dependsOn: ['publishPdf', 'asciidoctor'])
 
 if (!System.getProperty("en.only")) {
     for (f in new File(projectDir, "src").listFiles()) {

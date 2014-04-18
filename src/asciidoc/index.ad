@@ -1,0 +1,19 @@
+= Grails Documentation
+:toclevels: 10
+:numbered:
+:sectanchors:
+:experimental:
+:idprefix:
+:idseparator: -
+
+include::guide/introduction.adoc[]
+
+== What's New
+
+:leveloffset: 2
+include::guide/introduction/whatsNew24.adoc[]
+include::guide/introduction/whatsNew23.adoc[]
+include::guide/introduction/whatsNew22.adoc[]
+include::guide/introduction/whatsNew21.adoc[]
+include::guide/introduction/whatsNew.adoc[]
+:leveloffset: 0
