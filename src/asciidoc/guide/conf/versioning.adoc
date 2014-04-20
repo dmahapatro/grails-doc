@@ -31,3 +31,4 @@ import grails.util.GrailsUtil
 ...
 def grailsVersion = GrailsUtil.grailsVersion
 {code}
+

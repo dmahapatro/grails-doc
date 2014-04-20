@@ -1,3 +1,5 @@
+=== Deploying to a Maven Repository
+
 If you use Maven to build your Grails project, you can use the standard Maven targets @mvn install@ and @mvn deploy@.
 If not, you can deploy a Grails project or plugin to a Maven repository using the [release|http://grails.org/plugin/release] plugin.
 
@@ -99,3 +101,4 @@ String version = '0.1'
 {code}
 
 The 'artifactId' is taken from the plugin name. For example if you have a plugin called @FeedsGrailsPlugin@ the @artifactId@ will be "feeds". If your plugin does not specify a @groupId@ then this defaults to "org.grails.plugins".
+

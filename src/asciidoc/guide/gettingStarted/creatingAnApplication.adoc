@@ -1,3 +1,5 @@
+== Creating an Application
+
 To create a Grails application you first need to familiarize yourself with the usage of the @grails@ command which is used in the following manner:
 
 {code}

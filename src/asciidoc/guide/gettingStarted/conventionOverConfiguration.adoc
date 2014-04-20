@@ -1,3 +1,5 @@
+== Convention over Configuration
+
 Grails uses "convention over configuration" to configure itself. This typically means that the name and location of files is used instead of explicit configuration, hence you need to familiarize yourself with the directory structure provided by Grails.
 
 Here is a breakdown and links to the relevant sections:
@@ -16,3 +18,4 @@ Here is a breakdown and links to the relevant sections:
 ** @groovy@ - Other Groovy sources
 ** @java@ - Other Java sources
 * @test@  - [Unit and integration tests|guide:testing].
+

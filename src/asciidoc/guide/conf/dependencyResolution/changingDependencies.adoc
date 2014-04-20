@@ -1,4 +1,6 @@
-== Configuration Changing dependencies
+=== Snapshots and Other Changing Dependencies
+
+==== Configuration Changing dependencies
 
 Typically, dependencies are constant. That is, for a given combination of +group+, +name+ and +version+ the jar (or plugin) that it refers to will never change. The Grails dependency management system uses this fact to cache dependencies in order to avoid having to download them from the source repository each time. Sometimes this is not desirable. For example, many developers use the convention of a _snapshot_ (i.e. a dependency with a version number ending in ?-SNAPSHOT?) that can change from time to time while still retaining the same version number. We call this a "changing dependency".
 
@@ -15,7 +17,7 @@ runtime ('org.my:lib:1.2.3') {
 }
 ----
 
-=== Aether and SNAPSHOT dependencies
+==== Aether and SNAPSHOT dependencies
 
 The semantics for handling snapshots when using Aether in Grails are the same as those when using the Maven build tool. The default snapshot check policy is to check once a day for a new version of the dependency. This means that if a new snapshot is published during the day to a remote repository you may not see that change unless you manually clear out your local snapshot.
 
@@ -37,7 +39,7 @@ The above example configures an update policy that checks once a minute for chan
 * +daily+ - Check once a day for new snapshots (the default)
 * +interval:x+ - Check once every x minutes for new snapshots
 
-== Ivy and Changing dependencies
+==== Ivy and Changing dependencies
 
 For those used to Maven snapshot handling, if you use Aether dependency management you can expect the same semantics as Maven. If you choose to use Ivy there is a caveat to the support for changing dependencies that you should be aware of. Ivy will stop looking for newer versions of a dependency once it finds a remote repository that has the dependency.
 

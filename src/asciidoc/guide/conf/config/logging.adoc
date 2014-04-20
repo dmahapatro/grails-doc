@@ -19,14 +19,14 @@ h4. Logging levels
 
 There are several standard logging levels, which are listed here in order of descending priority:
 
-# off
-# fatal
-# error
-# warn
-# info
-# debug
-# trace
-# all
+* off
+* fatal
+* error
+* warn
+* info
+* debug
+* trace
+* all
 
 When you log a message, you implicitly give that message a level. For example, the method @log.error(msg)@ will log a message at the 'error' level. Likewise, @log.debug(msg)@ will log it at 'debug'. Each of the above levels apart from 'off' and 'all' have a corresponding log method of the same name.
 
@@ -48,8 +48,8 @@ A logger is the object you log messages to, so in the call @log.debug(msg)@, @lo
 
 There are two main ways to get hold of a logger:
 
-# use the @log@ instance injected into artifacts such as domain classes, controllers and services;
-# use the Commons Logging API directly.
+* use the @log@ instance injected into artifacts such as domain classes, controllers and services;
+* use the Commons Logging API directly.
 
 If you use the dynamic @log@ property, then the name of the logger is 'grails.app.<type>.<className>', where @type@ is the type of the artifact, for example 'controllers' or 'services', and @className@ is the fully qualified name of the artifact. For example, if you have this service:
 
@@ -474,3 +474,4 @@ grails.project.dependency.resolution = {
 {code}
 
 If you do this, you will get unfiltered, standard Java stacktraces in your log files and you won't be able to use the logging configuration DSL that's just been described. Instead, you will have to use the standard configuration mechanism for the library you choose.
+

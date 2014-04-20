@@ -31,3 +31,4 @@ This property supports the same values as the @grails.config.locations@ property
 {note}
 Grails also supports the concept of property place holders and property override configurers as defined in "Spring":http://www.springframework.org. For more information on these see the section on [Grails and Spring|guide:spring]
 {note}
+

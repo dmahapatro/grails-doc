@@ -1,3 +1,5 @@
+== Upgrading from Grails 2.3
+
 The @upgrade@ command has been removed from Grails 2.4.  The procedure for upgrading to the latest version of Grails will be detailed in the user guide from now on.  Below are steps that must be taken to upgrade an application from 2.3.x to 2.4.
 
 
@@ -41,3 +43,4 @@ The @grailsApplication@ bean definition should be left in the file but the @grai
 {code}
 
 {note}More TBD Before 2.4 Final Is Released{note}
+

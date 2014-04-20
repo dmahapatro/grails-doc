@@ -1,3 +1,5 @@
+=== Inherited Dependencies
+
 By default every Grails application inherits several framework dependencies. This is done through the line:
 
 {code}
@@ -11,3 +13,4 @@ inherits("global") {
     excludes "oscache", "ehcache"
 }
 {code}
+

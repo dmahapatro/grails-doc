@@ -1,3 +1,5 @@
+= Configurations and Dependencies
+
 Grails features five dependency resolution configurations (or 'scopes'):
 
 *  @build@: Dependencies for the build system only
@@ -55,7 +57,7 @@ runtime(
 )
 {code}
 
-h3. Disabling transitive dependency resolution
+== Disabling transitive dependency resolution
 
 By default, Grails will not only get the JARs and plugins that you declare, but it will also get their transitive dependencies. This is usually what you want, but there are occasions where you want a dependency without all its baggage. In such cases, you can disable transitive dependency resolution on a case-by-case basis:
 
@@ -72,11 +74,9 @@ runtime group:'com.mysql',
         transitive:false
 {code}
 
-{warning}
-Disabling transitive dependency resolution only works with the Ivy dependency manager. Aether does not support disabling of transitive resolution, instead explicit exclusions are required (see below).
-{warning}
+WARNING: Disabling transitive dependency resolution only works with the Ivy dependency manager. Aether does not support disabling of transitive resolution, instead explicit exclusions are required (see below).
 
-h3. Excluding specific transitive dependencies
+== Excluding specific transitive dependencies
 
 A far more common scenario is where you want the transitive dependencies, but some of them cause issues with your own dependencies or are unnecessary. For example, many Apache projects have 'commons-logging' as a transitive dependency, but it shouldn't be included in a Grails project (we use SLF4J). That's where the @excludes@ option comes in:
 
@@ -102,7 +102,7 @@ runtime('com.mysql:mysql-connector-java:5.1.16',
 }
 {code}
 
-h3. Using Ivy module configurations
+== Using Ivy module configurations
 
 Using the Ivy dependency manager (Aether not supported), if you use Ivy module configurations and wish to depend on a specific configuration of a module, you can use the @dependencyConfiguration@ method to specify the configuration to use.
 
@@ -133,3 +133,4 @@ grails.project.dependency.resolution = {
 {code}
 
 The @settings.groovy@ option applies to all projects, so it's the preferred approach.
+

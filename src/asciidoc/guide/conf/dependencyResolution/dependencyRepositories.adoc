@@ -1,3 +1,5 @@
+=== Dependency Repositories
+
 h4. Remote Repositories
 
 Initially your BuildConfig.groovy does not use any remote public Maven repositories. There is a default @grailsHome()@ repository that will locate the JAR files Grails needs from your Grails installation. To use a public repository, specify it in the @repositories@ block:
@@ -169,3 +171,4 @@ grails.project.ivy.authentication = {
     }
 }
 {code}
+

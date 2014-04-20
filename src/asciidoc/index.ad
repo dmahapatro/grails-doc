@@ -17,3 +17,87 @@ include::guide/introduction/whatsNew22.adoc[]
 include::guide/introduction/whatsNew21.adoc[]
 include::guide/introduction/whatsNew.adoc[]
 :leveloffset: 0
+
+== Getting Started
+
+:leveloffset: 2
+include::guide/gettingStarted/requirements.adoc[]
+include::guide/gettingStarted/downloadingAndInstalling.adoc[]
+include::guide/gettingStarted/creatingAnApplication.adoc[]
+include::guide/gettingStarted/aHelloWorldExample.adoc[]
+include::guide/gettingStarted/usingInteractiveMode.adoc[]
+include::guide/gettingStarted/ide.adoc[]
+include::guide/gettingStarted/conventionOverConfiguration.adoc[]
+include::guide/gettingStarted/runningAnApplication.adoc[]
+include::guide/gettingStarted/testingAnApplication.adoc[]
+include::guide/gettingStarted/deployingAnApplication.adoc[]
+include::guide/gettingStarted/supportedJavaEEContainers.adoc[]
+include::guide/gettingStarted/creatingArtefacts.adoc[]
+include::guide/gettingStarted/generatingAnApplication.adoc[]
+:leveloffset: 0
+
+include::guide/upgradingFrom22.adoc[]
+include::guide/upgradingFrom23.adoc[]
+
+== Configuration
+
+=== Basic Configuration
+
+:leveloffset: 2
+include::guide/conf/config/builtInOptions.adoc[]
+include::guide/conf/config/logging.adoc[]
+include::guide/conf/config/configGORM.adoc[]
+:leveloffset: 0
+
+=== Environments
+
+:leveloffset: 2
+include::guide/conf/environments.adoc[]
+:leveloffset: 0
+
+=== The DataSource
+
+:leveloffset: 2
+include::guide/conf/dataSource/dataSourcesAndEnvironments.adoc[]
+include::guide/conf/dataSource/JNDIDataSources.adoc[]
+include::guide/conf/dataSource/automaticDatabaseMigration.adoc[]
+include::guide/conf/dataSource/transactionAwareDataSourceProxy.adoc[]
+include::guide/conf/dataSource/databaseConsole.adoc[]
+include::guide/conf/dataSource/multipleDatasources.adoc[]
+:leveloffset: 0
+
+=== Externalized Configuration
+
+:leveloffset: 2
+include::guide/conf/configExternalized.adoc[]
+:leveloffset: 0
+
+=== Versioning
+
+:leveloffset: 2
+include::guide/conf/versioning.adoc[]
+:leveloffset: 0
+
+=== Project Documentation
+
+:leveloffset: 2
+include::guide/conf/docengine.adoc[]
+:leveloffset: 0
+
+=== Dependency Resolution
+
+:leveloffset: 4
+include::guide/conf/dependencyResolution/configurationsAndDependencies.adoc[]
+include::guide/conf/dependencyResolution/dependencyRepositories.adoc[]
+include::guide/conf/dependencyResolution/debuggingResolution.adoc[]
+include::guide/conf/dependencyResolution/inheritedDependencies.adoc[]
+include::guide/conf/dependencyResolution/providingDefaultDependencies.adoc[]
+include::guide/conf/dependencyResolution/changingDependencies.adoc[]
+include::guide/conf/dependencyResolution/dependencyReports.adoc[]
+include::guide/conf/dependencyResolution/pluginJARDependencies.adoc[]
+include::guide/conf/dependencyResolution/mavenIntegration.adoc[]
+include::guide/conf/dependencyResolution/mavendeploy.adoc[]
+include::guide/conf/dependencyResolution/pluginDependencies.adoc[]
+include::guide/conf/dependencyResolution/dependencyResolutionCaching.adoc[]
+:leveloffset: 0
+

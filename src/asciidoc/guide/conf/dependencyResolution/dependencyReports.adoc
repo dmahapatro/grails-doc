@@ -1,3 +1,5 @@
+=== Dependency Reports
+
 As mentioned in the previous section a Grails application consists of dependencies inherited from the framework, the plugins installed and the application dependencies itself.
 
 To obtain a report of an application's dependencies you can run the [dependency-report|commandLine] command:
@@ -31,3 +33,4 @@ compile - Dependencies placed on the classpath for compilation (total: 73)
 |    \--- org.grails:grails-core:2.3.0
 ...
 {code}
+

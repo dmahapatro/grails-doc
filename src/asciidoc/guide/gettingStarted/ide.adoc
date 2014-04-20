@@ -1,3 +1,5 @@
+== Getting Set Up in an IDE
+
 h4. IntelliJ IDEA
 
 [IntelliJ IDEA|http://www.jetbrains.com/idea] and the [JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home] plugin offer good support for Groovy and Grails developers. Refer to the section on [Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html] support on the JetBrains website for a feature overview.
@@ -37,3 +39,4 @@ Alternatively TextMate can easily open any project with its command line integra
 {code}
 mate .
 {code}
+

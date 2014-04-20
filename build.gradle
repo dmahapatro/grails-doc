@@ -33,7 +33,7 @@ buildscript {
 apply plugin: 'asciidoctor'
 
 asciidoctor {
-    logDocuments = true
+    //logDocuments = true
     outputDir = new File("$buildDir/docs/asciidoc")
     options = [
             ':safe': 0,

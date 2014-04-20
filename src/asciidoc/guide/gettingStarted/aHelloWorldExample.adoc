@@ -1,3 +1,5 @@
+== A Hello World Example
+
 Let's now take the new project and turn it into the classic "Hello world!" example. First, change into the "helloworld" directory you just created and start the Grails interactive console:
 
 bc.

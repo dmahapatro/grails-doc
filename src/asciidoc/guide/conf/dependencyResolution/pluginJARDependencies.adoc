@@ -1,3 +1,5 @@
+=== Plugin JAR Dependencies
+
 h4. Specifying Plugin JAR dependencies
 
 The way in which you specify dependencies for a [plugin|guide:plugins] is identical to how you specify dependencies in an application. When a plugin is installed into an application the application automatically inherits the dependencies of the plugin.
@@ -38,3 +40,4 @@ dependencies {
 {code}
 
 In this case the application explicitly declares a dependency on the "hibernate" plugin and specifies an exclusion using the @excludes@ method, effectively excluding the javassist library as a dependency.
+

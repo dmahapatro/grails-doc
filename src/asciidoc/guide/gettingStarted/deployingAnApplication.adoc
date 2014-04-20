@@ -1,3 +1,5 @@
+== Deploying an Application
+
 Grails applications are deployed as Web Application Archives (WAR files), and Grails includes the [war|commandLine] command for performing this task:
 
 {code}
@@ -21,3 +23,4 @@ When deploying Grails you should always run your containers JVM with the @-serve
 {code}
 -server -Xmx512M -XX:MaxPermSize=256m
 {code}
+

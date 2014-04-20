@@ -1,3 +1,5 @@
+== Installation Requirements
+
 Before installing Grails you will need as a minimum a Java Development Kit (JDK) installed version 1.6 or above. Download the appropriate JDK for your operating system, run the installer, and then set up an environment variable called @JAVA_HOME@ pointing to the location of this installation. If you're unsure how to do this, we recommend the video installation guides from [grailsexample.net|http://www.grailsexample.net/]:
 
 * [Windows|http://www.grailsexample.net/installing-a-grails-development-environment-on-windows/]
@@ -18,3 +20,4 @@ export PATH="$PATH:$JAVA_HOME/bin"
 {code} 
 
 if you're using bash or another variant of the Bourne Shell.
+

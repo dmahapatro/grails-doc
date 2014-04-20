@@ -241,3 +241,4 @@ When the Best Efforts 1PC pattern isn't suitable for handling transactions acros
 The [Spring transactions documentation|http://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/transaction.html#transaction-application-server-integration] contains information about integrating the JTA/XA transaction manager of different application servers. In this case, you can configure a bean with the name @transactionManager@ manually in @resources.groovy@ or @resources.xml@ file.
 
 There is also [Atomikos plugin|http://grails.org/plugin/atomikos] available for XA support in Grails applications.
+

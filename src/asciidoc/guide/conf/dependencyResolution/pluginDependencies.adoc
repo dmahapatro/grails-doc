@@ -1,3 +1,5 @@
+=== Plugin Dependencies
+
 You can declaratively specify plugins as dependencies via the dependency DSL instead of using the [install-plugin|commandLine] command:
 
 {code}
@@ -89,3 +91,4 @@ plugins {
     runtime ':searchable:0.5.4' // specifies a fixed searchable version
 }
 {code}
+

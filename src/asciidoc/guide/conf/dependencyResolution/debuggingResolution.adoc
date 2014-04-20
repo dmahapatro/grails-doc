@@ -1,3 +1,5 @@
+=== Debugging Resolution
+
 If you are having trouble getting a dependency to resolve you can enable more verbose debugging from the underlying engine using the @log@ method:
 
 {code}
@@ -18,3 +20,4 @@ grails.project.dependency.resolution = {
 {code}
 
 This is a global setting, so only use it if you have to.
+

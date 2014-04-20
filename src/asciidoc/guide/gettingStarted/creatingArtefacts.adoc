@@ -1,3 +1,5 @@
+== Creating Artefacts
+
 Grails ships with a few convenience targets such as [create-controller|commandLine], [create-domain-class|commandLine] and so on that will create [Controllers|guide:controllers] and different artefact types for you.
 {note}
 These are just for your convenience and you can just as easily use an IDE or your favourite text editor.
@@ -24,3 +26,4 @@ There are many such @create-*@ commands that can be explored in the command line
 {note}
 To decrease the amount of time it takes to run Grails scripts, use the [interactive|commandLine] mode.
 {note}
+

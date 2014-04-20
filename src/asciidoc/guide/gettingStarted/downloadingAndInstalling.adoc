@@ -1,3 +1,5 @@
+== Downloading and Installing
+
 The first step to getting up and running with Grails is to install the distribution. To do so follow these steps:
 
 * "Download":http://grails.org/Download a binary distribution of Grails and extract the resulting zip file to a location of your choice
