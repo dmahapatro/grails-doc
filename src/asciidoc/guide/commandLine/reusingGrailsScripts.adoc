@@ -1,9 +1,11 @@
+=== Re-using Grails scripts
+
 Grails ships with a lot of command line functionality out of the box that you may find useful in your own scripts (See the command line reference in the reference guide for info on all the commands). Of particular use are the [compile|commandLine], [package|commandLine] and [bootstrap|commandLine] scripts.
 
 The [bootstrap|commandLine] script for example lets you bootstrap a Spring [ApplicationContext|api:org.springframework.context.ApplicationContext] instance to get access to the data source and so on (the integration tests use this):
 
-{code}
-
+[source,groovy]
+----
 includeTargets << grailsScript("_GrailsBootstrap")
 
 target ('default': "Database stuff") {
@@ -18,18 +20,21 @@ target ('default': "Database stuff") {
         c?.close()
     }
 }
-{code}
+----
 
-h3. Pulling in targets from other scripts
+=== Pulling in targets from other scripts
 
 Gant lets you pull in all targets (except "default") from another Gant script. You can then depend upon or invoke those targets as if they had been defined in the current script. The mechanism for doing this is the @includeTargets@ property. Simply "append" a file or class to it using the left-shift operator:
-{code}
+
+[source,groovy]
+----
 includeTargets << new File("/path/to/my/script.groovy")
 includeTargets << gant.tools.Ivy
-{code}
+----
+
 Don't worry too much about the syntax using a class, it's quite specialised. If you're interested, look into the Gant documentation.
 
-h3. Core Grails targets
+=== Core Grails targets
 
 As you saw in the example at the beginning of this section, you use neither the File- nor the class-based syntax for @includeTargets@ when including core Grails targets. Instead, you should use the special @grailsScript()@ method that is provided by the Grails command launcher (note that this is not available in normal Gant scripts, just Grails ones).
 
@@ -47,12 +52,14 @@ The syntax for the @grailsScript()@ method is pretty straightforward: simply pas
 
 There are many more scripts provided by Grails, so it is worth digging into the scripts themselves to find out what kind of targets are available. Anything that starts with an "\_" is designed for reuse.
 
-h3. Script architecture
+=== Script architecture
 
 You maybe wondering what those underscores are doing in the names of the Grails scripts. That is Grails' way of determining that a script is _internal_, or in other words that it has not corresponding "command". So you can't run "grails \_grails-settings" for example. That is also why they don't have a default target.
 
 Internal scripts are all about code sharing and reuse. In fact, we recommend you take a similar approach in your own scripts: put all your targets into an internal script that can be easily shared, and provide simple command scripts that parse any command line arguments and delegate to the targets in the internal script. For example if you have a script that runs some functional tests, you can split it like this:
-{code}
+
+[source,groovy]
+----
 ./scripts/FunctionalTests.groovy:
 
 includeTargets << new File("${basedir}/scripts/_FunctionalTests.groovy")
@@ -69,7 +76,7 @@ target(runFunctionalTests: "Run functional tests.") {
     depends(...)
     ...
 }
-{code}
+----
 
 Here are a few general guidelines on writing scripts:
 
@@ -78,3 +85,4 @@ Here are a few general guidelines on writing scripts:
 * Put argument parsing into the "command" script.
 * To pass arguments to a target, create some script variables and initialise them before calling the target.
 * Avoid name clashes by using closures assigned to script variables instead of targets. You can then pass arguments direct to the closures.
+

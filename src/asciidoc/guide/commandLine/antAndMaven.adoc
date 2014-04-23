@@ -1,6 +1,8 @@
+=== Ant and Maven
+
 If all the other projects in your team or company are built using a standard build tool such as Ant or Maven, you become the black sheep of the family when you use the Grails command line to build your application. Fortunately, you can easily integrate the Grails build system into the main build tools in use today (well, the ones in use in Java projects at least).
 
-h3. Ant Integration
+=== Ant Integration
 
 When you create a Grails application with the [create-app|commandLine] command, Grails doesn't automatically create an Ant @build.xml@ file but you can generate one with the [integrate-with|commandLine] command:
 
@@ -298,3 +300,4 @@ mvn grails:run-app
 h4. Raising issues
 
 If you come across any problems with the Maven integration, please raise a [JIRA issue|http://jira.grails.org/browse/MAVEN].
+

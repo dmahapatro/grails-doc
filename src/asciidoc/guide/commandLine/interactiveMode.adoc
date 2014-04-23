@@ -1,3 +1,5 @@
+=== Interactive Mode
+
 Interactive mode is the a feature of the Grails command line which keeps the JVM running and allows for quicker execution of commands. To activate interactive mode type 'grails' at the command line and then use TAB completion to get a list of commands:
 
 !interactive-output.png!
