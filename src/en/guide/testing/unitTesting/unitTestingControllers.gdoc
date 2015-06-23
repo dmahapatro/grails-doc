@@ -718,7 +718,7 @@ class SimpleControllerSpec extends Specification {
 }
 {code}
 
-The testing framework also supports allowing Grails to create the command object instance automatically.  To test this invoke the no-arg version of the controller action method.  Grails will create an instance of the command object, perform data binding on it using the request parameters and validate the object just like it does in when the application is runnning.  See the test below.
+The testing framework also supports allowing Grails to create the command object instance automatically.  To test this invoke the no-arg version of the controller action method.  Grails will create an instance of the command object, perform data binding on it using the request parameters and validate the object just like it does in when the application is running.  See the test below.
 
 {code:java}
 import grails.test.mixin.TestFor
@@ -743,6 +743,57 @@ class SimpleControllerSpec extends Specification {
 
         then:
         response.text == 'Bad'
+    }
+}
+{code}
+
+h4. Testing allowedMethods
+
+The unit testing environment respects the [allowedMethods|controllers] property in controllers.  If a controller action is limited to be accessed with certain request methods, the unit test must be constructed to deal with that.
+
+{code:java}
+// grails-app/controllers/com/demo/DemoController.groovypackage com.demo
+
+class DemoController {
+
+    static allowedMethods = [save: 'POST', update: 'PUT', delete: 'DELETE']
+
+    def save() {
+        render 'Save was successful!'
+    }
+
+    // ...
+}
+{code}
+
+{code:java}
+// test/unit/com/demo/DemoControllerSpec.groovy
+package com.demo
+
+import grails.test.mixin.TestFor
+import spock.lang.Specification
+import static javax.servlet.http.HttpServletResponse.*
+
+@TestFor(DemoController)
+class DemoControllerSpec extends Specification {
+
+    void "test a valid request method"() {
+        when:
+        request.method = 'POST'
+        controller.save()
+
+        then:
+        response.status == SC_OK
+        response.text == 'Save was successful!'
+    }
+
+    void "test an invalid request method"() {
+        when:
+        request.method = 'DELETE'
+        controller.save()
+
+        then:
+        response.status == SC_METHOD_NOT_ALLOWED
     }
 }
 {code}
@@ -778,3 +829,5 @@ class SimpleControllerSpec extends Specification {
     }
 }
 {code}
+
+See [unit testing tag libraries|guide:unitTestingTagLibraries] for more information.

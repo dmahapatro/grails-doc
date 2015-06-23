@@ -12,6 +12,10 @@ Building the Guide
 To build the documentation, simply type:
 
     ./gradlew docs
+    
+This will take some time as it generates groovydoc for the Grails sources. If you want to just generate the user guide to preview your change you can do:
+
+    ./gradlew -Ddisable.groovydocs=true docs 
 
 Be warned: this command can take a while to complete and you should probably increase your Gradle memory settings by giving the `GRADLE_OPTS` environment variable a value like
 
@@ -39,9 +43,9 @@ Again, this can save a significant amount of time and memory.
 
 The main English user guide is generated in the `build/docs` directory, with the `guide` sub-directory containing the user guide part and the `ref` folder containing the reference material. To view the user guide, simply open `build/docs/index.html`.
 
-If you want to disable building of translations, you can use:
+If you want to enable building of translations, you can use:
 
-    ./gradlew -Den.only=true docs
+    ./gradlew -Dall.langs=true docs
 
 Contributing Documentation
 --------------------------

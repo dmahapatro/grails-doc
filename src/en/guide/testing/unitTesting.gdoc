@@ -20,7 +20,7 @@ You won't normally have to import any of the testing classes because Grails does
 * @grails.test.mixin.web.FiltersUnitTestMixin@
 * @grails.test.mixin.web.GroovyPageUnitTestMixin@
 * @grails.test.mixin.web.UrlMappingsUnitTestMixin@
-* @grails.test.mixin.webflow/WebFlowUnitTestMixin@
+* @grails.test.mixin.hibernate.HibernateTestMixin@
 
 Note that you're only ever likely to use the first two explicitly. The rest are there for reference.
 
@@ -35,29 +35,181 @@ Most testing can be achieved via the @TestFor@ annotation in combination with th
 
 The @TestFor@ annotation defines the class under test and will automatically create a field for the type of class under test. For example in the above case a "controller" field will be present, however if @TestFor@ was defined for a service a "service" field would be created and so on.
 
-The @Mock@ annotation creates mock version of any collaborators. There is an in-memory implementation of GORM that will simulate most interactions with the GORM API. For those interactions that are not automatically mocked you can use the built in support for defining mocks and stubs programmatically. For example:
+The @Mock@ annotation creates mock version of any collaborators. There is an in-memory implementation of GORM that will simulate most interactions with the GORM API.
 
+h4. doWithSpring and doWithConfig callback methods, FreshRuntime annotation
+
+The @doWithSpring@ callback method can be used to add beans with the BeanBuilder DSL. There is the @doWithConfig@ callback method for changing the grailsApplication.config values before the grailsApplication instance of the test runtime gets initialized.
+
+{code}
+import grails.test.mixin.support.GrailsUnitTestMixin
+
+import org.junit.ClassRule
+import org.junit.rules.TestRule
+
+import spock.lang.Ignore;
+import spock.lang.IgnoreRest
+import spock.lang.Shared;
+import spock.lang.Specification
+
+@TestMixin(GrailsUnitTestMixin)
+class StaticCallbacksSpec extends Specification {
+    static doWithSpring = {
+        myService(MyService)
+    }
+
+    static doWithConfig(c) {
+        c.myConfigValue = 'Hello'
+    }
+
+    def "grailsApplication is not null"() {
+        expect:
+        grailsApplication != null
+    }
+
+    def "doWithSpring callback is executed"() {
+        expect:
+        grailsApplication.mainContext.getBean('myService') != null
+    }
+
+    def "doWithConfig callback is executed"(){
+        expect:
+        config.myConfigValue == 'Hello'
+    }
+}
+{code}
+
+
+You can also use these callbacks without "static" together with the @[grails.test.runtime.FreshRuntime|api:grails.test.runtime.FreshRuntime]@ annotation.
+In this case, a clean application context and grails application instance is initialized for each test method call.
+
+{code}
+import grails.test.mixin.support.GrailsUnitTestMixin
+import grails.test.runtime.FreshRuntime;
+
+import org.junit.ClassRule
+import org.junit.rules.TestRule
+
+import spock.lang.Ignore;
+import spock.lang.IgnoreRest
+import spock.lang.Shared;
+import spock.lang.Specification
+
+@FreshRuntime
+@TestMixin(GrailsUnitTestMixin)
+class TestInstanceCallbacksSpec extends Specification {
+    def doWithSpring = {
+        myService(MyService)
+    }
+
+    def doWithConfig(c) {
+        c.myConfigValue = 'Hello'
+    }
+
+    def "grailsApplication is not null"() {
+        expect:
+        grailsApplication != null
+    }
+
+    def "doWithSpring callback is executed"() {
+        expect:
+        grailsApplication.mainContext.getBean('myService') != null
+    }
+
+    def "doWithConfig callback is executed"(){
+        expect:
+        config.myConfigValue == 'Hello'
+    }
+}
+{code}
+
+
+
+You can use @[org.grails.spring.beans.factory.InstanceFactoryBean|api:org.grails.spring.beans.factory.InstanceFactoryBean]@ together with doWithSpring and the [FreshRuntime|api:grails.test.runtime.FreshRuntime] annotation to mock beans in tests.
+
+{code}
+import grails.test.mixin.support.GrailsUnitTestMixin
+import grails.test.runtime.FreshRuntime
+
+import org.grails.spring.beans.factory.InstanceFactoryBean
+import org.junit.ClassRule
+
+import spock.lang.Shared
+import spock.lang.Specification
+
+@FreshRuntime
+@TestMixin(GrailsUnitTestMixin)
+class MockedBeanSpec extends Specification {
+    def myService=Mock(MyService)
+
+    def doWithSpring = {
+        myService(InstanceFactoryBean, myService, MyService)
+    }
+
+    def "doWithSpring callback is executed"() {
+        when:
+        def myServiceBean=grailsApplication.mainContext.getBean('myService')
+        myServiceBean.prova()
+        then:
+        1 * myService.prova() >> { true }
+    }
+}
+{code}
+
+h4. The DirtiesRuntime annotation
+
+Test methods may be marked with the @[grails.test.runtime.DirtiesRuntime|api:grails.test.runtime.DirtiesRuntime]@ annotation to indicate that the test modifies the runtime in ways which might be problematic for other tests and as such the runtime should be refreshed after this test method runs.
 
 {code}
 import grails.test.mixin.TestFor
 import spock.lang.Specification
+import grails.test.runtime.DirtiesRuntime
 
-@TestFor(BookController)
-@Mock(Book)
-class BookControllerSpec extends Specification {
+@TestFor(PersonController)
+class PersonControllerSpec extends Specification {
 
-    void "test search"() {
-        given:
-        def searchMock = mockFor(SearchService)
-        searchMock.demand.searchWeb { String q -> ['first result', 'second result'] }
-        searchMock.demand.static.logResults { List results ->  }
-        controller.searchService = searchMock.createMock()
-
+    @DirtiesRuntime
+    void "a test method which modifies the runtime"() {
         when:
-        controller.search()
+        Person.metaClass.someMethod = { ... }
+        // ...
 
         then:
-        controller.response.text.contains "Found 2 results"
+        // ...
+    }
+
+    void "a test method which should not be affected by the previous test method"() {
+        // ...
+    }
+}
+{code}
+
+h4. Sharing test runtime grailsApplication instance and beans for several test classes
+
+It's possible to share a single grailsApplication instance and beans for several test classes.
+This feature is activated by the @[SharedRuntime|api:grails.test.runtime.SharedRuntime]@ annotation. This annotation takes an optional class parameter
+implements @[SharedRuntimeConfigurer|api:grails.test.runtime.SharedRuntimeConfigurer]@ interface. All test classes referencing the same SharedRuntimeConfigurer implementation
+class will share the same runtime during a single test run.
+The value class for SharedRuntimeConfigurer annotation can also implement @[TestEventInterceptor|api:grails.test.runtime.TestEventInterceptor]@ . In this case the instance of the class
+will be registered as a test event interceptor for the test runtime.
+
+
+h4. Loading application beans in unit tests
+
+Adding @static loadExternalBeans = true@ field definition to a unit test class makes the Grails unit test runtime load all bean definitions from @grails-app/conf/spring/resources.groovy@ and @grails-app/conf/spring/resources.xml@ files.
+
+{code}
+import spock.lang.Issue
+import spock.lang.Specification
+import grails.test.mixin.support.GrailsUnitTestMixin
+
+@TestMixin(GrailsUnitTestMixin)
+class LoadExternalBeansSpec extends Specification {
+    static loadExternalBeans = true
+
+    void "should load external beans"(){
+        expect:
+        applicationContext.getBean('simpleBean') == 'Hello world!'
     }
 }
 {code}

@@ -122,13 +122,13 @@ h5. Linking
 There are several ways to create links with the documentation generator. A basic external link can either be defined using confluence or textile style markup:
 
 {code}
-[SpringSource|http://www.springsource.com/]
+[Pivotal|http://www.pivotal.io/oss]
 {code}
 
 or
 
 {code}
-"SpringSource":http://www.springsource.com/
+"Pivotal":http://www.pivotal.io/oss
 {code}
 
 For links to other sections inside the user guide you can use the @guide:@ prefix with the name of the section you want to link to:
@@ -142,10 +142,10 @@ The section name comes from the corresponding gdoc filename. The documentation e
 To link to reference items you can use a special syntax:
 
 {code}
-[controllers|renderPDF]
+[renderPDF|controllers]
 {code}
 
-In this case the category of the reference item is on the left hand side of the | and the name of the reference item on the right.
+In this case the category of the reference item is on the right hand side of the | and the name of the reference item on the left.
 
 Finally, to link to external APIs you can use the @api:@ prefix. For example:
 
